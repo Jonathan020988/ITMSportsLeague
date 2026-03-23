@@ -11,6 +11,8 @@ public class LeagueDbContext : DbContext// hereda de dbcontext que es una clase 
     }
 
     public DbSet<Team> Teams => Set<Team>();//entidad(Team), tabla(Teams) , entidad (Team); por cada tabla nueva o cada entridad es un nuevo DbSet
+    public DbSet<Player> Players => Set<Player>();
+
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)// validaciones, que tipos de datos,longitud, si es o no obligatorio
     {
@@ -36,5 +38,38 @@ public class LeagueDbContext : DbContext// hereda de dbcontext que es una clase 
             entity.HasIndex(t => t.Name)
                   .IsUnique();//columna es unica, no pueden haber nombres repetidos de equipo
         });
+
+        // ── Player Configuration ──
+        modelBuilder.Entity<Player>(entity =>
+        {
+            entity.HasKey(p => p.Id);
+            entity.Property(p => p.FirstName)
+                  .IsRequired()
+                  .HasMaxLength(80);
+            entity.Property(p => p.LastName)
+                  .IsRequired()
+                  .HasMaxLength(80);
+            entity.Property(p => p.BirthDate)
+                  .IsRequired();
+            entity.Property(p => p.Number)
+                  .IsRequired();
+            entity.Property(p => p.Position)
+                  .IsRequired();
+            entity.Property(p => p.CreatedAt)
+                  .IsRequired();
+            entity.Property(p => p.UpdatedAt)
+                  .IsRequired(false);
+
+            // Relación 1:N con Team// RELACION CON EF
+            entity.HasOne(p => p.Team)
+                  .WithMany(t => t.Players)
+                  .HasForeignKey(p => p.TeamId)
+                  .OnDelete(DeleteBehavior.Cascade);//borrado en cascada. ejemplo bayer lo borro, el borrado en cascada elimina todos lo jugadores que estan ligados a ese club
+
+            // Índice único compuesto: número de camiseta único por equipo
+            entity.HasIndex(p => new { p.TeamId, p.Number })
+                  .IsUnique();
+        });
+
     }
 }
