@@ -11,6 +11,8 @@ public class Team : AuditBase
     // Navigation Property - Colección de jugadores
     public ICollection<Player> Players { get; set; } = new List<Player>();// con player, lista vacia de jugadores
 
+    public ICollection<TournamentTeam> TournamentTeams { get; set; } = new List<TournamentTeam>();
+
     /*COLECCION UN ARRAY(UN ARREGLO)
     *ICOLLECTION, INSERTAR, CREAR, CONTAR, ORDENAR, ELIMINAR, AGREGAR REGISTROS NUEVOS (ES MUY LENTO POR TODO LO QUE HACE)
     *IENUMERABLE, SE ENFOCAN MAS EN PERFORMARCE, SON MEJORES PARA PETICIONES
