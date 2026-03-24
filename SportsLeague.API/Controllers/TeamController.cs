@@ -12,17 +12,14 @@ namespace SportsLeague.API.Controllers;
 public class TeamController : ControllerBase
 {
     private readonly ITeamService _teamService;
-    private readonly IMapper _mapper;
-    private readonly ILogger<TeamController> _logger;
+    private readonly IMapper _mapper;  
 
     public TeamController(
         ITeamService teamService,
-        IMapper mapper,
-        ILogger<TeamController> logger)
+        IMapper mapper)
     {
         _teamService = teamService;
-        _mapper = mapper;
-        _logger = logger;
+        _mapper = mapper;       
     }
 
     [HttpGet]// para obtener
