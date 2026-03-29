@@ -12,4 +12,6 @@ public class Tournament : AuditBase
 
     // Navigation Properties; NO PUEDO PASAR DE TOURNAMENT A TEAM, HAY CAMINO DEBO PASAR POR TOURNAMENTTEAM
     public ICollection<TournamentTeam> TournamentTeams { get; set; } = new List<TournamentTeam>();
+
+    public ICollection<SponsorTournament> SponsorTournaments { get; set; } = new List<SponsorTournament>();
 }
