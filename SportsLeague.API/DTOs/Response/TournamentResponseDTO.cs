@@ -13,4 +13,5 @@ public class TournamentResponseDTO
     public int TeamsCount { get; set; }// propiedad ad hoc para poder mostrar el numero de equipos q estan inscritos con un numero en especifico 
     public DateTime CreatedAt { get; set; }
     public DateTime? UpdatedAt { get; set; }
+    public int SponsorsCount { get; set; }// es para saber cuantos sponsors tiene un torneo
 }

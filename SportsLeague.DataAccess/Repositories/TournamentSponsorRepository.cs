@@ -5,15 +5,15 @@ using SportsLeague.Domain.Interfaces.Repositories;
 
 namespace SportsLeague.DataAccess.Repositories
 {
-    public class SponsorTournamentRepository : GenericRepository<SponsorTournament>, ISponsorTournamentRepository
+    public class TournamentSponsorRepository : GenericRepository<TournamentSponsor>, ITournamentSponsorRepository
     {
         
 
-        public SponsorTournamentRepository(LeagueDbContext context) : base(context)// contructor vacio
+        public TournamentSponsorRepository(LeagueDbContext context) : base(context)// contructor vacio
         {           
         }
 
-        public async Task<IEnumerable<SponsorTournament>> GetByTournamentIdAsync(int tournamentId)// trae todos los sponsors de un torneo
+        public async Task<IEnumerable<TournamentSponsor>> GetByTournamentIdAsync(int tournamentId)// trae todos los sponsors de un torneo
         {
             return await _dbSet
                 .Where(st => st.TournamentId == tournamentId)
@@ -21,7 +21,7 @@ namespace SportsLeague.DataAccess.Repositories
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<SponsorTournament>> GetBySponsorIdAsync(int sponsorId)// trae todos los torneos de un sponsor
+        public async Task<IEnumerable<TournamentSponsor>> GetBySponsorIdAsync(int sponsorId)// trae todos los torneos de un sponsor
         {
             return await _dbSet
                 .Where(st => st.SponsorId == sponsorId)

@@ -13,6 +13,6 @@ namespace SportsLeague.Domain.Entities
         public SponsorCategory Category { get; set; }
 
         // propiedad de navegacion
-        public ICollection<SponsorTournament> SponsorTournaments { get; set; } = new List<SponsorTournament>();
+        public ICollection<TournamentSponsor> TournamentSponsors { get; set; } = new List<TournamentSponsor>();
     }
 }

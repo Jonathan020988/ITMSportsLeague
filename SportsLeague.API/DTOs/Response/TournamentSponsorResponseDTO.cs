@@ -1,6 +1,6 @@
 ﻿namespace SportsLeague.API.DTOs.Response
 {
-    public class SponsorTournamentResponseDTO
+    public class TournamentSponsorResponseDTO
     {
         public int Id { get; set; }
         public int SponsorId { get; set; }

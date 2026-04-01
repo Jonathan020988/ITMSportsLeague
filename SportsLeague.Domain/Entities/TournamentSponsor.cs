@@ -1,6 +1,6 @@
 ﻿namespace SportsLeague.Domain.Entities
 {
-    public class SponsorTournament : AuditBase
+    public class TournamentSponsor : AuditBase
     {
         public int SponsorId { get; set; }  //(FK)
         public int TournamentId { get; set; }  //(FK)

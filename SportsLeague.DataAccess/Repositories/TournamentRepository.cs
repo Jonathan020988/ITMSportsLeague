@@ -25,7 +25,8 @@ public class TournamentRepository : GenericRepository<Tournament>, ITournamentRe
             .Where(t => t.Id == id)
             .Include(t => t.TournamentTeams)
                 .ThenInclude(tt => tt.Team)
-                //.ThenInclude(t => t.Players) //si quieres incluir tambien los jugadores de cada equipo
+            //.ThenInclude(t => t.Players) //si quieres incluir tambien los jugadores de cada equipo
+            .Include(t => t.TournamentSponsors)
             .FirstOrDefaultAsync();
 
         //primero estoy en torneo, luego para recuperar los equipos de ese torneo debo pasar 
