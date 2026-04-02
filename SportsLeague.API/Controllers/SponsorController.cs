@@ -58,7 +58,7 @@ public class SponsorController : ControllerBase
         }
         catch (InvalidOperationException ex)
         {
-            return BadRequest(new { message = ex.Message });
+            return Conflict(new { message = ex.Message });
         }
     }
 
@@ -116,7 +116,7 @@ public class SponsorController : ControllerBase
         }
         catch (InvalidOperationException ex)
         {
-            return BadRequest(new { message = ex.Message });
+            return Conflict(new { message = ex.Message });
         }
     }
 
