@@ -32,7 +32,7 @@ namespace SportsLeague.API.Services
         {
             // validacion # 1: nombre duplicado
             if (await _sponsorRepository.ExistsByNameAsync(sponsor.Name))
-                throw new InvalidOperationException("Sponsor name already exists");
+                throw new InvalidOperationException("Ya existe un sponsor con ese nombre");
 
             // validacion # 2: email simple
             if (!sponsor.ContactEmail.Contains("@"))

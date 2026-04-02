@@ -41,8 +41,13 @@ public class MappingProfile : Profile
         CreateMap<SponsorRequestDTO, Sponsor>();
 
         //TournamentSponsor mappings
-        CreateMap<TournamentSponsor, TournamentSponsorResponseDTO>();
+        CreateMap<TournamentSponsor, TournamentSponsorResponseDTO>()// se agregan datos para mas claridad en la informacion
+            .ForMember(dest => dest.SponsorName,
+                opt => opt.MapFrom(src => src.Sponsor.Name))
+            .ForMember(dest => dest.TournamentName,
+                opt => opt.MapFrom(src => src.Tournament.Name));
         CreateMap<TournamentSponsorRequestDTO, TournamentSponsor>();
+
     }
 
 
