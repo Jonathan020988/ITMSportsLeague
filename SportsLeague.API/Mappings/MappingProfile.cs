@@ -61,6 +61,23 @@ public class MappingProfile : Profile
                 opt => opt.MapFrom(src =>
                     src.Referee.FirstName + " " + src.Referee.LastName));//concate nombre y apellido del arbitro
 
+        // MatchResult mappings
+        CreateMap<MatchResultRequestDTO, MatchResult>();
+        CreateMap<MatchResult, MatchResultResponseDTO>();
+
+        // Goal mappings
+        CreateMap<GoalRequestDTO, Goal>();
+        CreateMap<Goal, GoalResponseDTO>()
+            .ForMember(dest => dest.PlayerName,
+                opt => opt.MapFrom(src =>
+                    src.Player.FirstName + " " + src.Player.LastName));
+
+        // Card mappings
+        CreateMap<CardRequestDTO, Card>();
+        CreateMap<Card, CardResponseDTO>()
+            .ForMember(dest => dest.PlayerName,
+                opt => opt.MapFrom(src =>
+                    src.Player.FirstName + " " + src.Player.LastName));
 
     }
 
