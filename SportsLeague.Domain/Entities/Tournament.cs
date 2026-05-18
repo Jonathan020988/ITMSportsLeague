@@ -11,7 +11,14 @@ public class Tournament : AuditBase
     public TournamentStatus Status { get; set; } = TournamentStatus.Pending;// TIPO TOURNAMENTSTATUS SE CREO EN ENTITIES
 
     // Navigation Properties; NO PUEDO PASAR DE TOURNAMENT A TEAM, HAY CAMINO DEBO PASAR POR TOURNAMENTTEAM
-    public ICollection<TournamentTeam> TournamentTeams { get; set; } = new List<TournamentTeam>();
+    public ICollection<TournamentTeam> TournamentTeams { get; set; } = new List<TournamentTeam>();    
+
 
     public ICollection<TournamentSponsor> TournamentSponsors { get; set; } = new List<TournamentSponsor>();
+
+    // 4 parte
+
+    // Agregar dentro de la clase Tournament, después de TournamentTeams:
+
+    public ICollection<Match> Matches { get; set; } = new List<Match>();
 }

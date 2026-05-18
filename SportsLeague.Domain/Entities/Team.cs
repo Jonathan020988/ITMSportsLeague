@@ -13,6 +13,17 @@ public class Team : AuditBase
 
     public ICollection<TournamentTeam> TournamentTeams { get; set; } = new List<TournamentTeam>();
 
+    // 4 parte
+    
+    // Agregar dentro de la clase Team, después de TournamentTeams:
+
+    // Partidos como local
+    public ICollection<Match> HomeMatches { get; set; } = new List<Match>();//apunta a match
+    // Partidos como visitante
+    public ICollection<Match> AwayMatches { get; set; } = new List<Match>();//
+
+
+
     /*COLECCION UN ARRAY(UN ARREGLO)
     *ICOLLECTION, INSERTAR, CREAR, CONTAR, ORDENAR, ELIMINAR, AGREGAR REGISTROS NUEVOS (ES MUY LENTO POR TODO LO QUE HACE)
     *IENUMERABLE, SE ENFOCAN MAS EN PERFORMARCE, SON MEJORES PARA PETICIONES

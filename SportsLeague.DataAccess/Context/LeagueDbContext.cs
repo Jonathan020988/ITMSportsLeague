@@ -19,6 +19,8 @@ public class LeagueDbContext : DbContext// hereda de dbcontext que es una clase 
     public DbSet<Sponsor> Sponsors => Set<Sponsor>();// Nuevo para entrega evento evaluativo
     public DbSet<TournamentSponsor> TournamentSponsors => Set<TournamentSponsor>();// Nuevo para entrega evento evaluativo
 
+    public DbSet<Match> Matches => Set<Match>();// dbset para match
+
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)// validaciones, que tipos de datos,longitud, si es o no obligatorio
     {
@@ -212,6 +214,48 @@ public class LeagueDbContext : DbContext// hereda de dbcontext que es una clase 
             // ÍNDICE ÚNICO COMPUESTO; UN SPONSOR NO PUEDE REPETIRSE EN EL MISMO TORNEO
             entity.HasIndex(ts => new { ts.SponsorId, ts.TournamentId })
                   .IsUnique();
+        });
+
+        // ── Match Configuration ──
+        modelBuilder.Entity<Match>(entity =>
+        {
+            entity.HasKey(m => m.Id);
+            entity.Property(m => m.MatchDate)
+                  .IsRequired();
+            entity.Property(m => m.Venue)
+                  .HasMaxLength(150);
+            entity.Property(m => m.Matchday)
+                  .IsRequired();
+            entity.Property(m => m.Status)
+                  .IsRequired();
+            entity.Property(m => m.CreatedAt)
+                  .IsRequired();
+            entity.Property(m => m.UpdatedAt)
+                  .IsRequired(false);
+
+            // Relación con Tournament (Cascade: eliminar torneo elimina partidos)
+            entity.HasOne(m => m.Tournament)
+                  .WithMany(t => t.Matches)
+                  .HasForeignKey(m => m.TournamentId)
+                  .OnDelete(DeleteBehavior.Cascade);// si borro un torneo deberia borrar todos los partidos de ese torneo
+
+            // Relación con HomeTeam (Restrict: evita ciclo de cascada)
+            entity.HasOne(m => m.HomeTeam)
+                  .WithMany(t => t.HomeMatches)
+                  .HasForeignKey(m => m.HomeTeamId)
+                  .OnDelete(DeleteBehavior.Restrict);
+
+            // Relación con AwayTeam (Restrict: evita ciclo de cascada)
+            entity.HasOne(m => m.AwayTeam)
+                  .WithMany(t => t.AwayMatches)
+                  .HasForeignKey(m => m.AwayTeamId)
+                  .OnDelete(DeleteBehavior.Restrict);
+
+            // Relación con Referee (Restrict: no eliminar árbitro con partidos)
+            entity.HasOne(m => m.Referee)
+                  .WithMany(r => r.Matches)
+                  .HasForeignKey(m => m.RefereeId)
+                  .OnDelete(DeleteBehavior.Restrict);// no puedo borrar un arbitro y a la vez borrar todos sus partidos
         });
 
 

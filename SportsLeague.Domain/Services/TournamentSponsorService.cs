@@ -37,7 +37,7 @@ namespace SportsLeague.Domain.Services
             if (await _tournamentSponsorRepository.ExistsAsync(sponsorId, tournamentId))
                 throw new InvalidOperationException("This sponsor is already linked to the tournament");
 
-            // VALIDACIÓN 4: ContractAmount > 0
+            // VALIDACIÓN 4: ContractAmount (el valor del patrocinio sea mayor)> 0
             if (contractAmount <= 0)
                 throw new InvalidOperationException("Contract amount must be greater than 0");
 
@@ -84,9 +84,10 @@ namespace SportsLeague.Domain.Services
             await _tournamentSponsorRepository.DeleteAsync(relation.Id);
         }
 
-        public async Task UnlinkSponsorFromTournamentAsync(int sponsorId, int tournamentId)// este es el metodo para buscar las relaciones de sponsor, filtra por tournamentid, sino existe error y si exixte lo elimina
+        public async Task UnlinkSponsorFromTournamentAsync(int sponsorId, int tournamentId)
+            // este es el metodo para buscar las relaciones de sponsor, filtra por tournamentid, sino existe error y si exixte lo elimina
         {
-            // Buscar la relación
+            // Buscar la relación del sponsor
             var relation = await _tournamentSponsorRepository
                 .GetBySponsorIdAsync(sponsorId);
 
@@ -96,7 +97,7 @@ namespace SportsLeague.Domain.Services
             if (existing == null)
                 throw new KeyNotFoundException("Relation between sponsor and tournament not found");
 
-            await _tournamentSponsorRepository.DeleteAsync(existing.Id);
+            await _tournamentSponsorRepository.DeleteAsync(existing.Id);//elimino la relacion usando su id
         }
     }
 }
