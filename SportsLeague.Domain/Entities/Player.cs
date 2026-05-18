@@ -15,4 +15,13 @@ public class Player : AuditBase
 
     // Navigation Property
     public Team Team { get; set; } = null!;//propiedad de navegacion es un obejto unico; un jugador pertenece a un solo equipo; 
+
+
+    // Agregar dentro de Player:
+
+    public ICollection<Goal> Goals { get; set; } = new List<Goal>();
+    public ICollection<Card> Cards { get; set; } = new List<Card>();
+
+
+
 }                                   //SE INICIALIZA NULA, PARA EVITAR PROBLEMAS
