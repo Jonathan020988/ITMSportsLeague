@@ -56,6 +56,15 @@ public static class DataSeeder
                 ("Andrés", "Cadavid", PlayerPosition.Defender, 4),
                 ("Adrián", "Arregui", PlayerPosition.Midfielder, 5),
                 ("Luciano", "Pons", PlayerPosition.Forward, 9),
+
+                ("Eder", "Chaux", PlayerPosition.Goalkeeper, 25),//8 jugadores añadidos para hacer las pruebas en swagger, probar el 12  titular
+                ("Málcom", "Palacios", PlayerPosition.Defender, 23),
+                ("Daniel", "Londoño", PlayerPosition.Defender, 33),
+                ("Frank", "Fabra", PlayerPosition.Defender, 18),
+                ("Leyser", "Chaverra", PlayerPosition.Defender, 2),
+                ("Esneyder", "Mena", PlayerPosition.Defender, 26),
+                ("Halam", "Loboa", PlayerPosition.Midfielder, 16),
+                ("Diego", "Moreno", PlayerPosition.Midfielder, 31),
             },
             // 3. América de Cali
             new[] {
@@ -237,5 +246,39 @@ public static class DataSeeder
             });
         }
         await context.SaveChangesAsync();
+
+
+        // ═══ 6. PARTIDOS PARA PROBAR LINEUPS EN SWAGGER ═══
+        // CAMBIO: se agregan partidos Scheduled y Finished para probar las validaciones.
+        var matches = new List<Match>
+        {
+            new()
+            {
+                TournamentId = tournament.Id,
+                HomeTeamId = teams[1].Id,
+                AwayTeamId = teams[0].Id,
+                RefereeId = referees[0].Id,
+                MatchDate = new DateTime(2026, 2, 10, 18, 00, 00),
+                Venue = teams[1].Stadium,
+                Matchday = 1,
+                Status = MatchStatus.Scheduled
+            },
+            new()
+            {
+                TournamentId = tournament.Id,
+                HomeTeamId = teams[1].Id,
+                AwayTeamId = teams[0].Id,
+                RefereeId = referees[1].Id,
+                MatchDate = new DateTime(2026, 2, 17, 18, 00, 00),
+                Venue = teams[0].Stadium,
+                Matchday = 2,
+                Status = MatchStatus.Finished
+            }
+        };
+
+        await context.Matches.AddRangeAsync(matches);
+        await context.SaveChangesAsync();
+
+
     }
 }
