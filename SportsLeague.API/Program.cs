@@ -33,6 +33,8 @@ builder.Services.AddScoped<IMatchResultRepository, MatchResultRepository>();
 builder.Services.AddScoped<IGoalRepository, GoalRepository>();
 builder.Services.AddScoped<ICardRepository, CardRepository>();
 
+builder.Services.AddScoped<IMatchLineupRepository, MatchLineupRepository>();// nuevo entrega 4
+
 
 
 // ── Services ──
@@ -52,6 +54,9 @@ builder.Services.AddScoped<MatchValidationHelper>();
 
 // ── Services (agregar) ──
 builder.Services.AddScoped<IStandingsService, StandingsService>();
+
+builder.Services.AddScoped<IMatchLineupService, MatchLineupService>();// nuevo entrega 4
+
 
 
 
